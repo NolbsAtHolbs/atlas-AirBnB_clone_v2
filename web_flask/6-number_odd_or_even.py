@@ -49,5 +49,6 @@ def display_number_html_odd_or_even(n):
         parity = "odd"
     return render_template("6-number_odd_or_even.html", n=n, parity=parity)
 
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
