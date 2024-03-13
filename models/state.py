@@ -2,6 +2,7 @@
 """Holds class State"""
 
 import models
+from models import storage
 from models.base_model import BaseModel, Base
 from models.city import City
 from os import getenv
@@ -13,20 +14,17 @@ from models.base_model import BaseModel, Base
 
 class State(BaseModel, Base):
     """Representation of state"""
-    if models.storage_t == "db":
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state")
+
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        cities = relationship("City", backref="state", cascade="all, delete-orphan")
     else:
-        name = ""
-        cites = []
-
-    @property
-    def cities(self):
-        """Getter for cities"""
-        return self._cities
-
-    @cities.setter
-    def cities(self, value):
-        """Setter for cities"""
-        self._cities = value
+        @property
+        def cities(self):
+            """City property for state reference"""
+            city_all = []
+            for city_ex in models.storage.all(City).values():
+                if city_ex.state_id == self.id:
+                    city_all.append(city_ex)
+            return city_all
