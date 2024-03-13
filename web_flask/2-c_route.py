@@ -16,5 +16,11 @@ def display_hbnb():
     return 'HBNB'
 
 
+@app.route('/c/<text>', strict_slashes=False)
+def display_text(text):
+    formatted_text = text.replace('_', ' ')
+    return f'C {formatted_text}'
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
