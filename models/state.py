@@ -8,6 +8,7 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
+from models.base_model import BaseModel, Base
 
 
 class State(BaseModel, Base):
@@ -19,3 +20,13 @@ class State(BaseModel, Base):
     else:
         name = ""
         cites = []
+
+    @property
+    def cities(self):
+        """Getter for cities"""
+        return self._cities
+
+    @cities.setter
+    def cities(self, value):
+        """Setter for cities"""
+        self._cities = value
