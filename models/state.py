@@ -14,8 +14,8 @@ from models.base_model import BaseModel, Base
 
 class State(BaseModel, Base):
     """Representation of state"""
-        __tablename__ = 'states'
-        name = Column(String(128), nullable=False)
+    __tablename__ = 'states'
+    name = Column(String(128), nullable=False)
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
         cities = relationship("City", backref="state", cascade="all, delete-orphan")
