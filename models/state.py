@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" holds class State"""
+"""Holds class State"""
+
 import models
 from models.base_model import BaseModel, Base
 from models.city import City
@@ -10,11 +11,11 @@ from sqlalchemy.orm import relationship
 
 
 class State(BaseModel, Base):
-    """Representation of state """
+    """Representation of state"""
     if models.storage_t == "db":
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state")
     else:
         name = ""
-	cites = []
+        cites = []
