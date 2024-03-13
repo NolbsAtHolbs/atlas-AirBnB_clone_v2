@@ -22,5 +22,12 @@ def display_c(text):
     return f'C {formatted_text}'
 
 
+@app.route('/python/', strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def display_python(text='is_cool'):
+    formatted_text = text.replace('_', ' ')
+    return f'Python {formatted_text}'
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
